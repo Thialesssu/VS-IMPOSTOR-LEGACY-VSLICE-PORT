@@ -1,0 +1,40 @@
+import funkin.play.song.Song;
+import funkin.play.PlayStatePlaylist;
+import funkin.play.cutscene.VideoCutscene;
+
+class MandoSong extends Song {
+
+    public function new() {
+     super("mando");
+    }
+
+    var hasPlayedCutscene:Bool = false;
+
+    override public function onCountdownStart(event) {
+        if (!PlayStatePlaylist.isStoryMode) hasPlayedCutscene = true;
+        if (!hasPlayedCutscene) {
+            event.cancel();
+            VideoCutscene.play(Paths.videos('week3/mando'));
+            hasPlayedCutscene = true;
+        }
+    }
+
+    override public function onCreate() {
+        hasPlayedCutscene = false;
+    }
+
+    override public function onBeatHit(event)
+    {
+    	switch (event.beat)
+	    {
+		    case 32:
+			    defaultCamZoom = 0.7;
+		    case 96:
+		    	defaultCamZoom = 0.7;
+		    case 192:
+		    	defaultCamZoom = 0.8;
+		    case 196:
+		    	defaultCamZoom = 0.9;
+    	}
+    }
+}
