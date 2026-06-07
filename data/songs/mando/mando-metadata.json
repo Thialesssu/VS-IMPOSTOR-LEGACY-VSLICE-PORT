@@ -6,12 +6,12 @@
  "offsets": { },
  "playData": {
   "difficulties": [
-   "normal"
+   "hard"
   ],
   "characters": {
    "player": "bf",
    "girlfriend": "gf",
-   "opponent": "dad",
+   "opponent": "yellow",
    "opponentVocals": [
     "yellow"
    ],
@@ -19,8 +19,8 @@
     "bf"
    ]
   },
-  "stage": "mainStage",
-  "noteStyle": "funkin",
+  "stage": "airship",
+  "noteStyle": "impostor",
   "previewEnd": 0
  },
  "generatedBy": "Friday Night Funkin' - v0.8.3",
