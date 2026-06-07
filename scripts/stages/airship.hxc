@@ -1,0 +1,80 @@
+import StringTools;
+import funkin.play.stage.ScriptedStage;
+import funkin.play.PlayState;
+import flixel.FlxSprite;
+
+class airshipStage extends ScriptedStage {
+	public function new() {
+		super("airship");
+	}
+
+	public var whiteAwkward:FlxSprite;
+	var henryTeleporter:FlxSprite;
+	var noticeYellow:Character;
+	var extraZoom:Float = 0;
+	var yellowdied:Array = ['Oversight'];
+	var isyellowdead:Bool = false;
+	var ext = 'BG/airship/mando/';
+	var flashers:Array<FlxSprite>;
+
+	override public function onCreate() {
+		isyellowdead = yellowdied.contains(PlayState.instance.currentChart.songName);
+	
+		var element8 = new FlxSprite(-1468, -995).loadGraphic(Paths.image(ext + 'fartingSky'));
+		element8.scrollFactor.set(0.3, 0.3);
+	
+		var element5 = new FlxSprite(-1125, 284).loadGraphic(Paths.image(ext + 'backSkyyellow'));
+		element5.scrollFactor.set(0.4, 0.7);
+	
+		var element6 = new FlxSprite(1330, 283).loadGraphic(Paths.image(ext + 'yellow cloud 3'));
+		element6.scrollFactor.set(0.5, 0.8);
+
+		var element7 = new FlxSprite(-837, 304).loadGraphic(Paths.image(ext + 'yellow could 2'));
+		element7.scrollFactor.set(0.6, 0.9);
+	
+		var element2 = new FlxSprite(-1387, -1231).loadGraphic(Paths.image(ext + 'window'));
+		var element4 = new FlxSprite(-1541, 242).loadGraphic(Paths.image(ext + 'cloudYellow 1'));
+		element4.scrollFactor.set(0.8, 0.8);
+		var element1 = new FlxSprite(-642, 325).loadGraphic(Paths.image(ext + 'backDlowFloor'));
+		element1.scrollFactor.set(0.9, 1);
+		var element0 = new FlxSprite(-2440, 336).loadGraphic(Paths.image(ext + 'DlowFloor'));
+		var element3 = new FlxSprite(-1113, -1009).loadGraphic(Paths.image(ext + 'glowYellow'));
+		element3.blend = "add";
+	
+		for (item in [element8, element5, element6, element7, element2, element4, element1, element0, element3])
+		{
+			item.scale.set(2, 2);
+			item.updateHitbox();
+			add(item);
+		}
+		whiteAwkward = new FlxSprite(298, 550);
+		whiteAwkward.frames = Paths.getSparrowAtlas(ext + 'white_awkward');
+		whiteAwkward.animation.addByPrefix('sweat', 'fetal position', 6, true);
+		whiteAwkward.animation.addByPrefix('stare', 'white stare', 24, false);
+		whiteAwkward.animation.play('sweat');
+		whiteAwkward.visible = !isyellowdead;
+		add(whiteAwkward);
+	
+		henryTeleporter = new FlxSprite(998, 620).loadGraphic(Paths.image(ext + 'Teleporter'));
+		henryTeleporter.visible = true;
+		add(henryTeleporter);
+	
+		deadbody = new FlxSprite(-400, 620).loadGraphic(Paths.image(ext + 'YELLOW'));
+		deadbody.visible = isyellowdead;
+		add(deadbody);
+	}
+	function shaderFlash(a = 0, b = 0.05, ?ignoreOption = false)
+	{
+		if (!ignoreOption && !ClientPrefs.flashing) return;
+	
+		FlxTween.num(1, a, b, {ease: FlxEase.expoOut}, flash);
+	}
+	function flash(n:Float):Void
+	{
+		var b:Float = (1 - n);
+		var w:Float = (n * 255);
+	
+		for (sprite in flashers)
+			sprite.setColorTransform(b, b, b, 1, w, w, w);
+	}
+}
