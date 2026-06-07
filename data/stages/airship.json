@@ -1,0 +1,36 @@
+{
+  "version": "1.0.0",
+  "name": "Airship",
+  "directory": "",
+  "cameraZoom": 0.7,
+  "props": [],
+  "characters": {
+    "bf": {
+      "zIndex": 300,
+      "position": [
+        920, 900
+      ],
+      "cameraOffsets": [
+        -100, -150
+      ]
+    },
+    "dad": {
+      "zIndex": 200,
+      "position": [
+        170, 360
+      ],
+      "cameraOffsets": [
+        200, 100
+      ]
+    },
+    "gf": {
+      "zIndex": 100,
+      "position": [
+        505, 800
+      ],
+      "cameraOffsets": [
+        -60, 210
+      ]
+    }
+  }
+}
