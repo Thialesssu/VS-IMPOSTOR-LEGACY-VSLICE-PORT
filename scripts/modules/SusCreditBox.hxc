@@ -55,17 +55,16 @@ function onCountdownStart(event)
 
 function assignValues()
 {
-	var rawJson = null;
-	if(Assets.exists(Paths.json('porters/' + PlayState.instance.currentSong.id.toLowerCase())))
-	rawJson = Assets.getText(Paths.json('porters/' + PlayState.instance.currentSong.id.toLowerCase()));
-	if(rawJson != null) json = Json.parse(rawJson);
+	var porter = null;
+	var creditPath:String = 'songs/' + PlayState.instance.currentSong.id.toLowerCase() + '/porter';
+	if (Assets.exists(Paths.txt(creditPath)))
+	porter = Assets.getText(Paths.txt(creditPath));
 	taskGroup.x = 0;
 	text.text = PlayState.instance.currentChart.songName;
-	subtext.text = 'Composer: ' + PlayState.instance.currentChart.songArtist + ((PlayState.instance.currentChart.charter != 'Unknown' && PlayState.instance.currentChart.charter !=  '') ? '\n' + 'Charter: ' + PlayState.instance.currentChart.charter : '') + (json != null ? '\n' + 'Ported by ' + json.porter : '');
+	subtext.text = 'Composer: ' + PlayState.instance.currentChart.songArtist + ((PlayState.instance.currentChart.charter != 'Unknown' && PlayState.instance.currentChart.charter !=  '') ? '\n' + 'Charter: ' + PlayState.instance.currentChart.charter : '') + (porter != null ? '\n' + 'Ported by ' + porter : '');
 	size = (subtext.fieldWidth > text.fieldWidth) ? subtext.fieldWidth : text.fieldWidth;
 	bg.makeGraphic(Math.floor(size + 24), Std.int(text.height + subtext.height + 15), 0xFFFFFFFF);
 	bg.height = text.height + subtext.height;
-	
 	taskGroup.x -= size + 15;
 }
 
