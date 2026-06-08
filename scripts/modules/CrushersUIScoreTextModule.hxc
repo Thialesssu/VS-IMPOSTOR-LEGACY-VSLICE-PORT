@@ -253,18 +253,14 @@ class CrushersUIScoreTextModule extends Module
 
 	function getMissesText():String
 	{
-		if(playState.currentSong.id.toLowerCase() == 'defeat')
-		{
-		return ' | Misses: ' + Highscore.tallies.missed + '/' + PlayState.instance.currentSong.scriptGet('missLimitCount');
+		switch(playState.currentSong.id.toLowerCase()) {
+			case 'defeat':
+				return ' | Misses: ' + Highscore.tallies.missed + '/' + PlayState.instance.currentSong.scriptGet('missLimitCount');
+			case 'victory':
+				return ' | Misses: Who cares? You already won!';
+			default:
+				return ' | Misses: ' + Highscore.tallies.missed;
 	    }
-		if(playState.currentSong.id.toLowerCase() == 'victory')
-		{
-		return ' | Misses: Who cares? You already won!';
-		}
-		if(playState.currentSong.id.toLowerCase() != 'defeat' || playState.currentSong.id.toLowerCase() != 'victory')
-		{
-		return ' | Misses: ' + Highscore.tallies.missed;
-		}
 	}
 
 	function getAccuracyText():String
